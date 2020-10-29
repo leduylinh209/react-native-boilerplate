@@ -10,7 +10,7 @@ import sagas from "../store/sagas"
 const config = {
     key: 'root',
     storage: AsyncStorage,
-    blacklist: ['loadingReducer'],
+    blacklist: ['loadingReducer'], //do not persist these keys
     debug: true,
 };
 
