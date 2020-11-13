@@ -25,6 +25,7 @@ const homeOptions: StackNavigationOptions = {
         fontWeight: 'bold',
     },
     headerRight: () => <ThemeController />,
+    headerLeft: () => null
 };
 
 interface IState {
@@ -36,30 +37,15 @@ interface IProps {
 }
 
 const AuthNavigator = () => {
-    const isLoggedIn = useSelector(
-        (state: IState) => state.loginReducer.isLoggedIn,
-    );
     return (
         <AuthStack.Navigator>
             <Stack.Screen
                 name="Login"
                 component={Login}
-                options={{
-                    // When logging out, a pop animation feels intuitive
-                    // You can remove this if you want the default 'push' animation
-                    animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
-                    headerRight: () => <ThemeController />,
-                }}
             />
             <Stack.Screen
                 name="ForgotPassword"
                 component={ForgotPassword}
-                options={{
-                    // When logging out, a pop animation feels intuitive
-                    // You can remove this if you want the default 'push' animation
-                    animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
-                    headerRight: () => <ThemeController />,
-                }}
             />
         </AuthStack.Navigator>
     );
@@ -67,7 +53,7 @@ const AuthNavigator = () => {
 
 const LoggedInNavigator = () => (
     <LoggedInStack.Navigator>
-        <Stack.Screen name="Home" component={Home} options={homeOptions} />
+        <Stack.Screen name="Home" component={Home} />
     </LoggedInStack.Navigator>
 );
 
@@ -101,7 +87,7 @@ const renderScreen = (isLogged: boolean) => {
                     // When logging out, a pop animation feels intuitive
                     // You can remove this if you want the default 'push' animation
                     animationTypeForReplace: isLogged ? 'push' : 'pop',
-                    headerRight: () => <ThemeController />
+                    headerRight: () => <ThemeController />,
                 }} />
         default:
             break;
